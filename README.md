@@ -135,7 +135,7 @@ I've manually tried many tags combination for Safebooru and I've found
 For filtering, We can get 1girl standing with clear-background
 So I used it with this image crawler and got my hand on 20k images
 
-
+---
 
 ## Data Cleaning
 
@@ -155,7 +155,6 @@ based on the 2k of data I've filtered out we can categorize filtered the data to
 - Too flashy background
 
 - Weird viewpoint
-  
 
 From 3k of data, the Majority of them(1:4) fall into "Chibi" category
 
@@ -172,13 +171,13 @@ since it'll be easier to just train classification model than classified the ima
 
 #### Sequential
 
-I began with Sequential model but well it's too long so I'll skip my effort on this part
-just know it didn't work out well enough
+I began with the Sequential model but well it's too long so I'll skip my effort on this part
+just to let you know it didn't work out well enough
 
 #### VGG16
 
 so transfer learning is the solution since I just need a good classifier with low effort :d
-I decided to go with VGG16
+I decided to go with VGG16 and fine-tune the last fourth layer
 
 ```python
 base_model = VGG16(weights="imagenet", include_top=False, input_shape=train_images[0].shape)
@@ -193,6 +192,8 @@ I split data into two category [''chibi,'not_chibi']
 **not_chibi** -> Cleaned images
 
 Crop image before resize to maintain aspect-ratio
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-18-32-image.png)
 
 ```python
 def square_pad(image):
@@ -218,11 +219,16 @@ RESULT:
 
 <img src="file:///C:/Users/hirun/AppData/Roaming/marktext/images/2022-04-29-09-21-53-image.png" title="" alt="" width="651">
 
-98% Accuracy which is pretty good
+98% Accuracy which is pretty good for just 12 epoch
+(well it's transfer learning ofc it would be good :p)
 
 ##### Filtering
 
-then I use it to filter the datasets and split them into chibi and not chibi folder
+###### Chibi - classifier
+
+then I use it to filter the datasets and split them into chibi and not_chibi folder
+It's not that fast with 5. X images/sec but it's still better than doing it manually
+On 16k images
 
 **Chibi**
 ![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-29-09-26-26-image.png)
@@ -230,3 +236,71 @@ then I use it to filter the datasets and split them into chibi and not chibi fol
 **Not Chibi**
 
 ![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-29-09-25-51-image.png)
+
+The Result is Pretty Satisfying with 2.4k Chibi was Filtered out with just 5X bad picking!!!
+Imagine doing that manually Lol
+<u>NOTE: This model actually also performed well
+with out-of-domain data Ex. Random internet chibi/not chibi character images</u>
+
+###### not_single Filter
+
+After that, we've got our hands on 13.5 k images
+but we still have something like this in it "not_single" images
+
+Which is Unacceptable
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-22-50-image.png)
+
+So I'll just use the same code to train classification on it
+
+**Square Pad them**
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-21-34-image.png)
+
+**Train**
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-24-24-image.png)
+
+Evaluate
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-25-09-image.png)
+
+The result is satisfying so we can use it to filtered the images
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-28-57-image.png)
+
+The result is "OKAY" But not on par with Chibi - Classifier model
+I Assume that the cause comes from lower datasets (APX 100 ~  images) to train with
+
+So it predicted some single images as not_single
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-32-26-image.png)
+
+But it isn't too bad since I've filtered almost all "Not_single" images automatically
+900~ Images was filtered out
+
+I've left with 12k images
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-37-41-image.png)
+
+But still, There would've surely have something that I should cleaned out
+
+###### Here's Hell - Manually clean them again
+
+So I get back to reality and started cleaning the datasets
+
+Main Concern that I'll filtered them out is
+
+- [x]  **not to my liking, out of overall style** - Kemo, Pokaemon, Weird things
+
+- [x]  **Weird Pose** - yoga pose or something like that
+
+- [x]  **Too Much Effect** - An Explosion Effect / Sparkle / or some sort
+
+From 12k datasets | 2k~ was filtered out - > And I've Left with 10k Cleaned Datasets
+
+![](C:\Users\hirun\AppData\Roaming\marktext\images\2022-04-30-00-52-03-image.png)
+
+I Then uploaded it to Google-Drive which You can found it here
+
+https://drive.google.com/drive/folders/1szQAsdtu9U9Dum0FPflC93R3D-w8qFCC?usp=sharing
+
+And that's the End of my datasets, For now
