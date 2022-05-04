@@ -135,12 +135,17 @@ I've manually tried many tags combination for Safebooru and I've found
 For filtering, We can get 1girl standing with clear-background
 So I used it with this image crawler and got my hand on 20k images
 
+** EXAMPLE OF DATA
+https://safebooru.org/index.php?page=post&s=list&tags=full_body+solo+standing+1girl+white_background **
 ---
 
 ## Data Cleaning
 
+I Randomly selected 10 sets each sets contain 10 images and count for bad images
+I've found that out of 100 images there's 30~ that I need to get rid of
+So i Can say that it have 70% efficiency
 Well on 20k datasets with an efficiency of 70% it worth cleaning
-but at this rate, we would need to clean out 6k of data
+but at this rate, we would need to clean out 6k of data in 20k~ datasets
 which is a terrible job, But I've already filtered 3k of data out manually
 before I find the efficiency of data so we need to figure our way out from there
 
