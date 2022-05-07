@@ -311,3 +311,53 @@ I Then uploaded it to Google-Drive which You can found it here
 https://drive.google.com/drive/folders/1szQAsdtu9U9Dum0FPflC93R3D-w8qFCC?usp=sharing
 
 And that's the End of my datasets, For now
+
+# Trainning
+
+## Trying out my data
+
+Because I'm new to Gans, and also new to machine learning
+I'll start from the well know Gans which I know didn't suitable for full body gans
+but who cares :P
+
+### DC Gans - trying on real data
+
+I've trained DC Gans on anime face datasets before
+and it worked quite well
+
+So I'm interested in trying it with my real datasets
+But since it has too much detail to capture
+I Assumed that it'll be a mess, by far the result's a mess
+I've Faced vanishing gradient and mode collapse on my model
+and the result is the same noise over and over
+
+##### WGAN-GP - just DC Gans but Better
+
+So I decided to change the loss function to Wasserstein loss
+which improves the stability of Gans model basically (Wgans)
+but in my senpai(senior) code he uses WGAN-GP
+which also changed the weight clipping method
+used on discriminator to Gradient Penalty
+[L03 - Wasserstein GANs with Gradient Penalty - YouTube](https://www.youtube.com/watch?v=v6y5qQ0pcg4)
+
+The weight clipping is limit the range of weight
+and if it's over the length we'll just use the max value
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-07-07-44-44-1-4hWCkkakgFiq3NU7g9WDbQ.png)
+
+Result in simpler distribution (row 1 images) 
+Compare to (row 2 images) using Wgans-GP
+
+I don't know much in-depth about them but by far, This is what I understand
+The result improves quite a lot but by far it's not that good
+with 100~ epochs on 128x128 - > 10k datasets
+(i resized it from my original 258x258 datasets)
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/07-05-2022-08-07-47.png)
+
+It captured the shape of human
+at this point, it proved that quality of my datasets
+Is decent enough for the model to form the right shape
+
+The problem is resolution, Model didn't capture the important detail of the data
+Such as Face & Accessory, So I need to figure my way out of this
