@@ -355,9 +355,16 @@ with 100~ epochs on 128x128 - > 10k datasets
 
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/07-05-2022-08-07-47.png)
 
-It captured the shape of human
-at this point, it proved that quality of my datasets
+It captured the shape of a human
+at this point, it proved that the quality of my datasets
 Is decent enough for the model to form the right shape
 
-The problem is resolution, Model didn't capture the important detail of the data
+The data problem is resolved,
+though the Model didn't capture the important detail of the data
 Such as Face & Accessory, So I need to figure my way out of this
+
+My Approach Is progans since I hope scaling model as we scale images
+As progans paper claims it should capture resolution as
+Generator and Discriminator(critic) scaled together
+The Results show quite improvement
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
