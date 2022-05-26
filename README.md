@@ -3,12 +3,40 @@
 Full body Generation of anime girls
 Development & Research logs
 
+# Brief introduction to Gans
+
+Gans or Generative Advisoral Networks to be exact
+it's a class of machine learning frameworks by [Ian Goodfellow - Wikipedia](https://en.wikipedia.org/wiki/Ian_Goodfellow)
+since its publication, there's tons of research and Implementation after it
+Gans Mainly Involved two main components
+and I'll introduce them in a conceptual way with an example from
+A fake money maker and Police
+
+#### Generator - A Fake Moneymaker
+
+first, we have a Generator by the name you can already what's his job
+Generator or Moneymaker will be trying to generate data
+in this case, an image of Fake bills to fool the police
+
+#### Discriminator - A Police
+
+police or discriminator on the other hand will be given an information
+that there's a fake bill and it need to detect them (work like a classification model)
+
+### Get Good Together
+
+as the Moneymaker trying to fool and got caught by police
+it'll learn what style and shape, color, and tone to use to fool the police
+and as the police saw more bill experience fakes and reals data
+it'll learn to get better at detecting
+these result in a training loop where the two of them get good together
+to the point that the money maker or Generator to be exact
+can completely fool even good police/discriminator
+
 # Datasets
 
 Like other ML models, we need good data
 The conditions that we need to pay attention to are
-
-- Full Body Image
 
 - Clear Background
 
@@ -331,7 +359,7 @@ I Assumed that it'll be a mess, by far the result's a mess
 I've Faced vanishing gradient and mode collapse on my model
 and the result is the same noise over and over
 
-##### WGAN-GP - just DC Gans but Better
+### WGAN-GP - just DC Gans but Better
 
 So I decided to change the loss function to Wasserstein loss
 which improves the stability of Gans model basically (Wgans)
@@ -363,8 +391,19 @@ The data problem is resolved,
 though the Model didn't capture the important detail of the data
 Such as Face & Accessory, So I need to figure my way out of this
 
+### ProGans - scaling layers together!
+
 My Approach Is progans since I hope scaling model as we scale images
 As progans paper claims it should capture resolution as
 Generator and Discriminator(critic) scaled together
 The Results show quite improvement
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
+But as you can see it still didn't capture a detailed feature of a body
+so we need better way to improve the performance
+
+### StyleGans - why use random noise, use Style!
+
+I've Found StyleGans, one of the famous architecture for Gans
+The Brief introduction is instead of using random noise
+we map those noise to style and style transfer it with ADaIN to generated image
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
