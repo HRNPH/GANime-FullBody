@@ -413,6 +413,7 @@ As progans paper claims, it should capture resolution as
 Generator and Discriminator(critic) scaled together
 The Results show quite an improvement
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
+
 But as you can see it still didn't capture a detailed feature of a body
 so we need a better way to improve the performance
 
@@ -430,7 +431,8 @@ if I managed to improve it I'll Scale it up
 
 **<u>Result on 64x64 resolution - latent size 512</u>**
 
-![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png)latent size of 512 makes it work (it should've worked if I use 512 latent sizes lol)
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png)
+latent size of 512 makes it work (it should've worked if I use 512 latent sizes lol)
 **Tips: Big latent Size can make the model take much time to adapt**
 but it's better than **NOT ENOUGH** latents size
 
