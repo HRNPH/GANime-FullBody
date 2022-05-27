@@ -3,13 +3,23 @@
 Full body Generation of anime girls
 Development & Research logs
 
+## Purpose
+
+- Satisfy my desire
+  there's Anime Face Gans but I want more waifu!
+
+- Can be used as a placeholder sprite in game development
+  I also develop some noob games as a hobby
+  and I wanted to use some good sprite as a placeholder
+  or as the real sprite for my game
+
 # Brief introduction to Gans
 
 Gans or Generative Advisoral Networks to be exact
 it's a class of machine learning frameworks by [Ian Goodfellow - Wikipedia](https://en.wikipedia.org/wiki/Ian_Goodfellow)
 since its publication, there's tons of research and Implementation after it
 Gans Mainly Involved two main components
-and I'll introduce them in a conceptual way with an example from
+and I'll conceptually introduce them with an example from
 A fake money maker and Police
 
 #### Generator - A Fake Moneymaker
@@ -33,9 +43,14 @@ these result in a training loop where the two of them get good together
 to the point that the money maker or Generator to be exact
 can completely fool even good police/discriminator
 
+**Note**: Though there's a variety of Gans models but they're all based on
+Generator and Discriminator improvement
+in this project, we'll work on dcgans, wgan-gp, progans, stylegans    
+
 # Datasets
 
-Like other ML models, we need good data
+before getting our hands dirty with coding and model structure
+Like other ML models, we need good data Gans was no exception
 The conditions that we need to pay attention to are
 
 - Clear Background
@@ -196,7 +211,7 @@ More Than 1
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-04-17-38-51-sample_fa92cf481785d32b12a56f6b8e7d395e7aeb3cdd.jpg)
 
 From my Point of view
-I've found that Chibi Images is repetitive
+I've found that Chibi Images is quite repetitive
 in other words, it's easy to spot on
 
 so why don't I train the classification model to filter them out
@@ -324,7 +339,7 @@ So I get back to reality and started cleaning the datasets
 
 The main concern that I'll filter them out is
 
-- [x] **not to my liking, out of overall style** - Kemo, Pokemon, Weird things
+- [x] **Not to my liking, out of overall style** - Kemo, Pokemon, Weird things
 
 - [x] **Weird Pose** - yoga pose or something like that
 
@@ -394,16 +409,34 @@ Such as Face & Accessory, So I need to figure my way out of this
 ### ProGans - scaling layers together!
 
 My Approach Is progans since I hope scaling model as we scale images
-As progans paper claims it should capture resolution as
+As progans paper claims, it should capture resolution as
 Generator and Discriminator(critic) scaled together
-The Results show quite improvement
+The Results show quite an improvement
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
 But as you can see it still didn't capture a detailed feature of a body
-so we need better way to improve the performance
+so we need a better way to improve the performance
 
 ### StyleGans - why use random noise, use Style!
 
 I've Found StyleGans, one of the famous architecture for Gans
 The Brief introduction is instead of using random noise
-we map those noise to style and style transfer it with ADaIN to generated image
-![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/progan.png)
+we map those noise to style and style transfer it with ADaIN to the generated image
+but Gans Model takes a long time to train so I'll go with **64x64** because it take less time
+if I managed to improve it I'll Scale it up
+
+<u><strong>Result on 64x64 resolution - latent size 256</strong></u>
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-00-25-image.png)with the latent size of 256 results is pretty shitty lol
+
+**<u>Result on 64x64 resolution - latent size 512</u>**
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png)latent size of 512 makes it work (it should've worked if I use 512 latent sizes lol)
+**Tips: Big latent Size can make the model take much time to adapt**
+but it's better than **NOT ENOUGH** latents size
+
+## Clean Data - YES Again...
+
+As you can see I think the model did quite a good job on my data
+but there's something that i would like to call **"Dark Matter"** in the data
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-05-image.png)![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-15-image.png)
