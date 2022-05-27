@@ -460,7 +460,9 @@ so from this reason what I'll do is **CLEAN** the datasets again, This time we t
 ### Target
 
 - Have An Effect
+  
   ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-29-38-image.png)
 
 - Have weird accessory
+  
   ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-28-30-image.png)
