@@ -431,10 +431,12 @@ if I managed to improve it I'll Scale it up
 
 **<u>Result on 64x64 resolution - latent size 512</u>**
 
-![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png)
+<img src="https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png" title="" alt="" width="750">
+
+
 latent size of 512 makes it work (it should've worked if I use 512 latent sizes lol)
 **Tips: Big latent Size can make the model take much time to adapt**
-but it's better than **NOT ENOUGH** latents size
+but it's better than **NOT ENOUGH** latent size
 
 ## Clean Data - YES Again...
 
