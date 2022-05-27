@@ -433,7 +433,6 @@ if I managed to improve it I'll Scale it up
 
 <img src="https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/df6908a90d6cc41a05e441158de5d48267f46c9b.png" title="" alt="" width="750">
 
-
 latent size of 512 makes it work (it should've worked if I use 512 latent sizes lol)
 **Tips: Big latent Size can make the model take much time to adapt**
 but it's better than **NOT ENOUGH** latent size
@@ -441,6 +440,27 @@ but it's better than **NOT ENOUGH** latent size
 ## Clean Data - YES Again...
 
 As you can see I think the model did quite a good job on my data
-but there's something that i would like to call **"Dark Matter"** in the data
+but there's something that i would like to call **"Dark Matter"** in the result
 
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-05-image.png)![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-15-image.png)
+
+I assume that the cause come from something like THIS
+
+![](images/2022-05-27-19-18-16-image.png)<img src="images/2022-05-27-19-18-28-image.png" title="" alt="" width="256">
+
+since the output of the model, I saw so far
+none of them that's considerably **GOOD**
+have an **"effect"** or **"Accessory"** like samples of datasets shown above 
+
+the different posing and facing that I thought would be a problem did not happen
+since there's variety of posing that I've found while generating data using random noise
+
+so from this reason what I'll do is **CLEAN** the datasets again, This time we targeted on
+
+### Target
+
+- Have An Effect
+  ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-29-38-image.png)
+
+- Have weird accessory
+  ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-28-30-image.png)
