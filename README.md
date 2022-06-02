@@ -422,7 +422,7 @@ so we need a better way to improve the performance
 I've Found StyleGans, one of the famous architecture for Gans
 The Brief introduction is instead of using random noise
 we map those noise to style and style transfer it with ADaIN to the generated image
-but Gans Model takes a long time to train so I'll go with **64x64** because it take less time
+but Gans Model takes a long time to train so I'll go with **64x64** because it takes less time
 if I managed to improve it I'll Scale it up
 
 <u><strong>Result on 64x64 resolution - latent size 256</strong></u>
@@ -440,11 +440,11 @@ but it's better than **NOT ENOUGH** latent size
 ## Clean Data - YES Again...
 
 As you can see I think the model did quite a good job on my data
-but there's something that i would like to call **"Dark Matter"** in the result
+but there's something that I would like to call **"Dark Matter"** in the result
 
 ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-05-image.png)![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-18-59-15-image.png)
 
-I assume that the cause come from something like THIS
+I assume that the cause comes from something like THIS
 
 ![](images/2022-05-27-19-18-16-image.png)<img src="images/2022-05-27-19-18-28-image.png" title="" alt="" width="256">
 
@@ -453,7 +453,7 @@ none of them that's considerably **GOOD**
 have an **"effect"** or **"Accessory"** like samples of datasets shown above 
 
 the different posing and facing that I thought would be a problem did not happen
-since there's variety of posing that I've found while generating data using random noise
+since there's a variety of posing that I've found while generating data using random noise
 
 so from this reason what I'll do is **CLEAN** the datasets again, This time we targeted on
 
@@ -466,3 +466,89 @@ so from this reason what I'll do is **CLEAN** the datasets again, This time we t
 - Have weird accessory
   
   ![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-05-27-19-28-30-image.png)
+
+### Clean Data - Resnet50
+
+This time I use resnet 50 instead of VGG16
+
+firstly I clean 500 images manually
+Then use the same process - Square Pad -> Resize -> Train
+I'm too lazy so I put all the images I don't want into the BAD(1) folder
+And Keep what I want in the GOOD(0) folder
+
+Split Train, Test
+
+**<u>TRAIN ---> BOOM!</u>**
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-08-48-37-image.png)
+
+If I use this model to classify I prob cleaned most of the BAD data
+but'll lose some of the GOOD data but since I don't care if I lose some
+I'll use this to clean my data anyway
+
+#### Sample Of Prediction
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-09-07-47-unknown.png)
+
+**CLEAN - Data**
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-08-50-47-image.png)
+Simply just predict then move files
+
+### Result
+
+we've left with a good & bad folder
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-08-53-01-image.png)
+
+#### BAD Data - Variety Of Style
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-08-55-19-image.png)
+
+#### Good Data - Simpler Cloths
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-08-54-01-image.png)
+
+As you can see, The **<u>Good</u>** Folder contains a lot simpler images
+and we've left with 4.2k APX~ of images to train with which is insufficient
+but I think we should try it out first!
+
+## Train Model 2
+
+I trained model 2 with everything the same as model 1
+except datasets of **<u>1 is Cleaned and 2 is ULTRA_Cleaned</u>**
+
+**<u>Result on 64x64 resolution - latent size 512</u>**
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-09-10-17-unknown.png)
+
+### Representative of two model comparison
+
+![](https://raw.githubusercontent.com/HRNPH/GANime-FullBody/main/images/2022-06-02-09-14-09-image.png)
+
+<u>The left side is Model 1 And the Right Side is Model 2</u>
+
+From my point of view, Model 2 is better in every bit of detail
+especially legs & face so I would like to scale up Model 2 to 128
+but before that, I think I need better matrices for evaluation to really know
+so let's do it
+
+# FID Comparison
+
+**<u>FID</u>** or [**<u>Fréchet inception distance</u>**]([Fréchet inception distance - Wikipedia](https://en.wikipedia.org/wiki/Fr%C3%A9chet_inception_distance))
+ is one of the ways to compare two distributions of images if they contain the same feature, styling & etc...
+
+so we can use it without generated output if it contains the same feature
+as it should contain if it's Real Images
+
+Implement it yourself would be a pain, But luckily there's a library for it
+[GitHub - mseitzer/pytorch-fid: Compute FID scores with PyTorch.](https://github.com/mseitzer/pytorch-fid)
+
+### Generate Image for comparison
+
+To compare two distributions of images.
+First we need images to be compared with (which I already have)
+and images to be compared.
+
+I need to generate tons images using both models.
+Then I can compare their FID score
