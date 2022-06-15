@@ -1,27 +1,40 @@
 <!-- create html page that show response of request -->
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- load css index.css-->
+    <link rel="stylesheet" href="index.css">
     <title>Ganime-Fullbody</title>
+</head>
 
-    <body>
-        <!-- create div and image with id for javascript to change -->
-        <div id="image">
-            <img id='api' src="images/fullbody.png" alt="">
+<body>
+    <!-- create div and image with id for javascript to change -->
+    <div class='image'>
+        <div>
+            <center><img id='api' height="400vh" src="./placeholder.png" alt=""></center>
         </div>
-        <!-- create script elements then use axios to GET request to 'https://Example-FastAPI-uvicorn-1.hrnph.repl.co/api'-->
-        <!-- also enable cross origin -->
-        <script>
-            axios.get('https://Example-FastAPI-uvicorn-1.hrnph.repl.co/api')
+        <button id="button" onclick="gan()">Gan-New-Girl!</button>
+        <button id="button_red" onclick="rickroll()">Gan-New-Man?</button>
+    </div>
+    <!-- create button that call gan() when click -->
+
+
+    <!-- create script elements then use axios to GET request to 'https://Example-FastAPI-uvicorn-1.hrnph.repl.co/api'-->
+    <!-- also enable cross origin -->
+    <script>
+        function gan() {
+            axios.get('http://54.251.20.58/api')
                 .then(function(response) {
                     // handle success
-                    console.log(response);
+                    // get image encode as 64 from response
+                    imgbase64 = response.data.image;
                     // decode as base 64 and change image
                     var image = document.getElementById('api');
-                    image.src = "data:image/png;base64," + response.data;
+                    image.src = "data:image/png;base64," + imgbase64;
                 })
                 .catch(function(error) {
                     // handle error
@@ -30,8 +43,32 @@
                 .finally(function() {
                     // always executed
                 });
-        </script>
+        }
+        // save image from <img> to device
+        function saveImage() {
+            var image = document.getElementById('api');
+            var canvas = document.createElement('canvas');
+            canvas.width = 128;
+            canvas.height = 128;
+            canvas.getContext('2d').drawImage(image, 0, 0);
+            var dataURL = canvas.toDataURL("image/png", 1.0);
+            var link = document.createElement('a');
+            link.href = dataURL;
+            link.download = "image.png";
+            link.click();
+        }
 
-    </body>
+        function rickroll() {
+            // rickroll when click
+            window.location.href = "https://www.youtube.com/embed/lO9K7VMFo2Y?autoplay=1";
+
+        }
+    </script>
+    <!-- on load call gan() -->
+    <script>
+        window.onload = gan();
+    </script>
+
+</body>
 
 </html>

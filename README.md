@@ -530,13 +530,13 @@ except datasets of **<u>1 is Cleaned and 2 is ULTRA_Cleaned</u>**
 
 From my point of view, Model 2 is better in every bit of detail
 especially legs & face so I would like to scale up Model 2 to 128
-but before that, I think I need better matrices for evaluation to really know
+but before that, I think I need better matrices for evaluation to know
 so let's do it
 
 # FID Comparison
 
 **<u>FID</u>** or [**<u>Fréchet inception distance</u>**]([Fréchet inception distance - Wikipedia](https://en.wikipedia.org/wiki/Fr%C3%A9chet_inception_distance))
- is one of the ways to compare two distributions of images if they contain the same feature, styling & etc...
+ is one of the ways to compare two distributions of images if they contain the same feature, stylin ,& etc...
 
 so we can use it without generated output if it contains the same feature
 as it should contain if it's Real Images
@@ -547,8 +547,40 @@ Implement it yourself would be a pain, But luckily there's a library for it
 ### Generate Image for comparison
 
 To compare two distributions of images.
-First we need images to be compared with (which I already have)
+First, we need images to be compared with (which I already have)
 and images to be compared.
 
-I need to generate tons images using both models.
+I need to generate tons of images using both models.
 Then I can compare their FID score
+
+First I generate 10k of model 1 images
+Then also models 2 images
+
+![](images/2022-06-08-19-01-27-image.png)
+
+### Compute FID Score
+
+I compare model 1 datasets (cleaned raw (A)) with model 2 (ultimately cleaned (b))
+
+Model 1 (A)
+
+![](https://cdn.discordapp.com/attachments/953224263727476766/984058960158007306/unknown.png)
+
+Model 2 (B)
+
+![](https://cdn.discordapp.com/attachments/953224263727476766/984059060515139694/unknown.png)
+
+#### Comparison
+
+You can see that model 2 perform better (ultimately)
+
+| Model          | Datasets             | Fid    |
+|:--------------:|:--------------------:|:------:|
+| style_gans (A) | cleaned raw (A)      | 136.05 |
+| style_gans (B) | ultimate cleaned (B) | 73.46  |
+
+so my conclusion is Model (B) datasets to scaling up! so let's do it
+
+with the power of one of our sponsors [AWS - Amazon Web Services](https://ai-builders.github.io/about/#%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3)
+
+I used their instance (p3.xlarge) which is basically Nvidia v100 with 16 GB Vram
