@@ -23,11 +23,11 @@
     <!-- create button that call gan() when click -->
 
 
-    <!-- create script elements then use axios to GET request to 'http://54.251.20.58/api'-->
+    <!-- create script elements then use axios to GET request to 'http://54.251.20.58/api' from middle api interace 'https://api-aws-ganime.herokuapp.com/api'-->
     <!-- also enable cross origin -->
     <script>
         function gan() {
-            axios.get('http://54.251.20.58/api')
+            axios.get('https://api-aws-ganime.herokuapp.com/api')
                 .then(function(response) {
                     // handle success
                     // get image encode as 64 from response
