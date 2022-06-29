@@ -29,6 +29,8 @@
         function gan() {
             // while waiting for response, show placeholder images (loading.gif)
             document.getElementById('api').src = "./loading.gif";
+            // change button text to loading
+            document.getElementById('button').innerHTML = "Loading...";
 
             axios.get('https://api-aws-ganime.herokuapp.com/api')
                 .then(function(response) {
@@ -42,13 +44,18 @@
                 .catch(function(error) {
                     // handle error
                     console.log(error);
+                    // show error message 'Can't Contact API Server' by adding html
+                    document.getElementById('api').innerHTML = "<center><h1>API Server Didn't Open</h1></center>";
+
                 })
                 .finally(function() {
-                    // always executed
+                    // change button text back to Gan-New-Girl!
+                    document.getElementById('button').innerHTML = "Gan-New-Girl!";
                 });
         }
         // save image from <img> to device
         function saveImage() {
+            ใท
             var image = document.getElementById('api');
             var canvas = document.createElement('canvas');
             canvas.width = 128;
@@ -68,7 +75,7 @@
             // RickRoll random
             if (random === 1) {
                 // RICKROLL link
-                window.location.href = "https://www.youtube.com/watch?v=-AXetJvTfU0";
+                window.location.href = "https://shattereddisk.github.io/rickroll/rickroll.mp4";
             } else {
                 // FAILURE
                 window.location.href = "https://www.youtube.com/embed/lO9K7VMFo2Y?autoplay=1";
