@@ -26,7 +26,20 @@
     <!-- create script elements then use axios to GET request to 'http://54.251.20.58/api' from middle api interace 'https://api-aws-ganime.herokuapp.com/api'-->
     <!-- also enable cross origin -->
     <script>
+        function is_loading() {
+            return document.getElementById('api').src == './placeholder.png'
+        }
+
         function gan() {
+            // checking if loading?
+            if (is_loading()) {
+                return;
+            }
+            // create audio effect
+            const audio = new Audio();
+            audio.src = "./loadingsound.mp3";
+            audio.play();
+
             // while waiting for response, show placeholder images (loading.gif)
             document.getElementById('api').src = "./loading.gif";
             // change button text to loading
@@ -40,6 +53,7 @@
                     // decode as base 64 and change image
                     var image = document.getElementById('api');
                     image.src = "data:image/png;base64," + imgbase64;
+
                 })
                 .catch(function(error) {
                     // handle error
@@ -51,6 +65,9 @@
                 .finally(function() {
                     // change button text back to Gan-New-Girl!
                     document.getElementById('button').innerHTML = "Gan-New-Girl!";
+                    // stop playing audio
+                    audio.pause();
+
                 });
         }
         // save image from <img> to device
