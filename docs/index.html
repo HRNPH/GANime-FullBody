@@ -27,6 +27,9 @@
     <!-- also enable cross origin -->
     <script>
         function gan() {
+            // while waiting for response, show placeholder images (loading.gif)
+            document.getElementById('api').src = "./loading.gif";
+
             axios.get('https://api-aws-ganime.herokuapp.com/api')
                 .then(function(response) {
                     // handle success
@@ -76,7 +79,8 @@
     </script>
     <!-- on load call gan() -->
     <script>
-        window.onload = gan();
+        // wait for 10 seconds then call gan()
+        setTimeout(gan, 3000);
     </script>
 
 </body>
