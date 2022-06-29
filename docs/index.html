@@ -59,8 +59,18 @@
         }
 
         function rickroll() {
-            // rickroll when click
-            window.location.href = "https://www.youtube.com/embed/lO9K7VMFo2Y?autoplay=1";
+            // random number between 1 and 2
+            var random = Math.floor(Math.random() * 2) + 1;
+
+            // RickRoll random
+            if (random === 1) {
+                // RICKROLL link
+                window.location.href = "https://www.youtube.com/watch?v=-AXetJvTfU0";
+            } else {
+                // FAILURE
+                window.location.href = "https://www.youtube.com/embed/lO9K7VMFo2Y?autoplay=1";
+            }
+
 
         }
     </script>
