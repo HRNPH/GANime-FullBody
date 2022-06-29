@@ -31,10 +31,7 @@
         }
 
         function gan() {
-            // checking if loading?
-            if (is_loading()) {
-                return;
-            }
+
             // create audio effect
             const audio = new Audio();
             audio.src = "./loadingsound.mp3";
@@ -44,6 +41,9 @@
             document.getElementById('api').src = "./loading.gif";
             // change button text to loading
             document.getElementById('button').innerHTML = "Loading...";
+
+            // prevent button click event
+            document.getElementById('button').disabled = true;
 
             axios.get('https://api-aws-ganime.herokuapp.com/api')
                 .then(function(response) {
@@ -67,6 +67,8 @@
                     document.getElementById('button').innerHTML = "Gan-New-Girl!";
                     // stop playing audio
                     audio.pause();
+                    // enable button click
+                    document.getElementById('button').disabled = false;
 
                 });
         }
@@ -103,8 +105,8 @@
     </script>
     <!-- on load call gan() -->
     <script>
-        // wait for 10 seconds then call gan()
-        setTimeout(gan, 3000);
+        // wait for 0 milseconds then call gan()
+        setTimeout(gan, 0);
     </script>
 
 </body>
