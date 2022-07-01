@@ -31,6 +31,14 @@
         }
 
         function gan() {
+            const sleep = ms => new Promise(res => setTimeout(res, ms));
+            // rename
+            const cooldown = async(ms) => {
+                document.getElementById('button').innerHTML = `Cooldown...`;
+                await sleep(ms);
+
+
+            };
 
             // create audio effect
             const audio = new Audio();
@@ -53,6 +61,16 @@
                     // decode as base 64 and change image
                     var image = document.getElementById('api');
                     image.src = "data:image/png;base64," + imgbase64;
+                    // cooldown 5 sec
+                    cooldown(5000).then(() => {
+                        // change button text back to Gan-New-Girl!
+                        document.getElementById('button').innerHTML = "Gan-New-Girl!";
+                        // stop playing audio
+                        audio.pause();
+                        // enable button click
+                        document.getElementById('button').disabled = false;
+                    })
+
 
                 })
                 .catch(function(error) {
@@ -62,15 +80,6 @@
                     document.getElementById('api').innerHTML = "<center><h1>API Server Didn't Open</h1></center>";
 
                 })
-                .finally(function() {
-                    // change button text back to Gan-New-Girl!
-                    document.getElementById('button').innerHTML = "Gan-New-Girl!";
-                    // stop playing audio
-                    audio.pause();
-                    // enable button click
-                    document.getElementById('button').disabled = false;
-
-                });
         }
         // save image from <img> to device
         function saveImage() {
