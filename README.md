@@ -1,5 +1,7 @@
 # GANime-FullBody
 
+> Artifact from an era where's diffusion model have yet conquered the world of image generation.
+
 Full body Generation of anime girls
 Development & Research logs from when the diffusion isn't conquering the world.
 
